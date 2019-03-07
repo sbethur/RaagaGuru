@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -16,6 +20,7 @@ import com.google.android.exoplayer2.util.Util;
 
 public class PlayerActivity extends AppCompatActivity {
 
+    public static final String EXTRA_REPLY = "com.proto.raagaguru.REPLY";
     private PlayerView playerView;
     private PlayerControlView controlView;
     private SimpleExoPlayer player;
@@ -29,7 +34,15 @@ public class PlayerActivity extends AppCompatActivity {
         controlView = findViewById(R.id.control_view);
 
         Intent intent = getIntent();
-        audioFile = intent.getStringExtra(LaunchActivity.AUDIO_FILE);
+        audioFile = intent.getStringExtra(MainActivity.AUDIO_FILE);
+
+        final Button button = findViewById(R.id.saveLessonButton);
+        button.setOnClickListener(view -> {
+            Intent replyIntent = new Intent();
+            replyIntent.putExtra(EXTRA_REPLY, "Lesson Name");
+            setResult(RESULT_OK, replyIntent);
+            finish();
+        });
     }
 
     @Override
@@ -51,7 +64,7 @@ public class PlayerActivity extends AppCompatActivity {
         controlView.setFastForwardIncrementMs(2000);
         controlView.setRewindIncrementMs(2000);
 
-        player.setPlayWhenReady(true);
+        //player.setPlayWhenReady(true);
     }
 
     @Override
@@ -66,4 +79,12 @@ public class PlayerActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    public void saveLessonClick(View view) {
+        Toast.makeText(
+                getApplicationContext(),
+                "save this lesson",
+                Toast.LENGTH_LONG).show();
+    }
+
 }

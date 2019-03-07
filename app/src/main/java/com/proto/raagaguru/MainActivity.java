@@ -3,16 +3,13 @@ package com.proto.raagaguru;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
-import com.proto.raagaguru.R;
 
 import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
-public class LaunchActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private static final int READ_REQUEST_CODE = 42;
     public static final String AUDIO_FILE = PACKAGE_NAME + ".AUDIO_FILE";
@@ -20,12 +17,12 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launch);
+        setContentView(R.layout.activity_main);
     }
 
 
     public void viewLessonsClick(View view) {
-        startActivity(new Intent(this, com.proto.raagaguru.PlayerActivity.class));
+        startActivity(new Intent(this, com.proto.raagaguru.LessonActivity.class));
     }
 
     public void createNewLessonClick(View view) {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/AppBG"
     android:minHeight="0dp"
-    tools:context=".LaunchActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -65,7 +65,6 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-
         android:layout_marginBottom="24dp"
 
         android:onClick="createNewLessonClick"
