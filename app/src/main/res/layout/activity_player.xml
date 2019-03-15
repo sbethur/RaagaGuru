@@ -33,10 +33,12 @@
         android:layout_marginBottom="24dp"
         android:background="@android:color/holo_green_dark"
 
+        android:fontFamily="@font/roboto_mono"
         android:onClick="saveLessonClick"
-        android:text="@string/save_lesson"
 
-        android:textColor="@android:color/primary_text_dark"
-        android:textSize="24sp" />
+        android:text="@string/save_lesson"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

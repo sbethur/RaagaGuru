@@ -19,6 +19,6 @@ public interface LessonDao {
     @Query("DELETE FROM lesson_table")
     void deleteAll();
 
-    @Query("SELECT * FROM lesson_table ORDER BY audioFilePath ASC")
+    @Query("SELECT * FROM lesson_table")
     LiveData<List<Lesson>> getAllLessons();
 }

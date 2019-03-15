@@ -3,6 +3,10 @@
     <string name="viewLessons">View Lessons</string>
     <string name="createNewLesson">Create New Lesson</string>
     <string name="appName">Raaga Guru</string>
-    <string name="empty_not_saved">Lesson not saved because it is empty.</string>
+    <string name="empty_not_saved">Lesson not saved</string>
     <string name="save_lesson">Save Lesson</string>
+    <string name="lessonSaved">Lesson Saved</string>
+    <string name="placeholder">No Lessons Added</string>
+    <string name="lessonMenuDescription">Lesson Menu</string>
+    <string name="deleteLesson">Delete</string>
 </resources>

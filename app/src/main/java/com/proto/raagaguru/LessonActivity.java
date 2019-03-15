@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,7 +19,7 @@ import java.util.Random;
 
 public class LessonActivity extends AppCompatActivity {
 
-    public static final int NEW_LESSON_ACTIVITY_REQUEST_CODE = 1;
+    private static final int FILE_METADATA_CODE = 43;
     private LessonViewModel lessonViewModel;
     private LessonListAdapter lessonListAdapter;
 
@@ -26,23 +28,24 @@ public class LessonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lessons);
         lessonViewModel = ViewModelProviders.of(this).get(LessonViewModel.class);
+
         lessonViewModel.getAllLessons().observe(this, lessons -> {
             // Update the cached copy of the lessons in the adapter.
             lessonListAdapter.setLessons((ArrayList<Lesson>) lessons);
         });
 
         initRecyclerView();
+
+        // Get the Intent that started this activity and extract the string
+        Intent receivedIntent = getIntent();
+        if (receivedIntent.hasExtra(MainActivity.AUDIO_FILE)) {
+            String audioFile = receivedIntent.getStringExtra(MainActivity.AUDIO_FILE);
+            Intent intent = new Intent(this, PlayerActivity.class);
+            intent.putExtra(MainActivity.AUDIO_FILE, audioFile);
+            startActivityForResult(intent, FILE_METADATA_CODE);
+        }
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        Lesson lesson = new Lesson("Song1");
-//        lessonViewModel.insert(lesson);
-//        Lesson lesson2 = new Lesson("Song1");
-//        lessonViewModel.insert(lesson2);
-//    }
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -51,17 +54,11 @@ public class LessonActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
     }
 
-    public void createNewLessonClick2(View view) {
-        Random r = new Random();
-        Lesson  lesson = new Lesson("Lesson " + r.nextInt(10000 - 1) + 1);
-        lessonViewModel.insert(lesson);
-    }
-
-/*    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_LESSON_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Lesson lesson = new Lesson(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
+        if (requestCode == FILE_METADATA_CODE && resultCode == RESULT_OK) {
+            Lesson lesson = new Lesson(data.getStringExtra(PlayerActivity.LESSON_NAME));
             lessonViewModel.insert(lesson);
         } else {
             Toast.makeText(
@@ -69,5 +66,12 @@ public class LessonActivity extends AppCompatActivity {
                 R.string.empty_not_saved,
                 Toast.LENGTH_LONG).show();
         }
-    }*/
+    }
+
+    public void showLessonMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.actions, popup.getMenu());
+        popup.show();
+    }
 }

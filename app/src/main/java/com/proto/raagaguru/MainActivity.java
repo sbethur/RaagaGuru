@@ -2,10 +2,13 @@ package com.proto.raagaguru;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import java.util.HashMap;
 
 import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
@@ -48,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode,
-                                 Intent resultData) {
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
 
         // The ACTION_OPEN_DOCUMENT intent was sent with the request code
         // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultData != null) {
                 uri = resultData.getData();
                 assert uri != null;
-                Intent intent = new Intent(this, PlayerActivity.class);
+                Intent intent = new Intent(this, LessonActivity.class);
                 intent.putExtra(AUDIO_FILE, uri.toString());
                 startActivity(intent);
             }

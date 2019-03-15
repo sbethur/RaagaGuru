@@ -48,11 +48,7 @@ public abstract class LessonRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            dao.deleteAll();
-            Lesson lesson = new Lesson("Lesson 1");
-            dao.insert(lesson);
-            lesson = new Lesson("Lesson 2");
-            dao.insert(lesson);
+            //dao.deleteAll();
             return null;
         }
     }
