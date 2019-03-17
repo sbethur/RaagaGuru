@@ -2,15 +2,10 @@ package com.proto.raagaguru;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
-import java.util.HashMap;
-
-import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
 public class MainActivity extends AppCompatActivity {
 

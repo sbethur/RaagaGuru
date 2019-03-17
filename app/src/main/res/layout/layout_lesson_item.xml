@@ -36,6 +36,6 @@
         android:onClick="showLessonMenu"
 
         style="?android:attr/actionOverflowButtonStyle"
-        android:src="@drawable/ic_action_more_vert" />
+        android:src="@drawable/ic_action_more_vertical" />
 
 </RelativeLayout>

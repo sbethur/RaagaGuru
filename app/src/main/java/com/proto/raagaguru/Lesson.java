@@ -20,12 +20,12 @@ public class Lesson {
     }
 
     @NonNull
-    public String getAudioFilePath() {
+    String getAudioFilePath() {
         return audioFilePath;
     }
 
     @NonNull
-    public String getAudioFileName() {
+    String getAudioFileName() {
         return audioFileName;
     }
 }

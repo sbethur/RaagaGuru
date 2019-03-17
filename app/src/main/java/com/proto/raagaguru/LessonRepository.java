@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
-public class LessonRepository {
+class LessonRepository {
 
     private LessonDao lessonDao;
     private LiveData<List<Lesson>> allLessons;
@@ -22,7 +22,7 @@ public class LessonRepository {
     }
 
 
-    public void insert (Lesson lesson) {
+    void insert(Lesson lesson) {
         new insertAsyncTask(lessonDao).execute(lesson);
     }
 
