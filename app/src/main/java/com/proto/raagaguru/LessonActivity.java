@@ -10,11 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewParent;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class LessonActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class LessonActivity extends AppCompatActivity {
 
     private static final int FILE_METADATA_CODE = 43;
     private LessonViewModel lessonViewModel;
@@ -45,7 +47,7 @@ public class LessonActivity extends AppCompatActivity implements PopupMenu.OnMen
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        lessonListAdapter = new LessonListAdapter(this);
+        lessonListAdapter = new LessonListAdapter(this, lessonViewModel);
         recyclerView.setAdapter(lessonListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
     }
@@ -63,35 +65,6 @@ public class LessonActivity extends AppCompatActivity implements PopupMenu.OnMen
                 getApplicationContext(),
                 R.string.empty_not_saved,
                 Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void showLessonMenu(View view) {
-        PopupMenu popup = new PopupMenu(this, view);
-        popup.setOnMenuItemClickListener(this);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.actions, popup.getMenu());
-        popup.show();
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        item.getItemId();
-        switch (item.getItemId()) {
-            case R.id.menu_edit:
-                Toast.makeText(
-                        getApplicationContext(),
-                        "Implement edit",
-                        Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_delete:
-                Toast.makeText(
-                        getApplicationContext(),
-                        "Implement delete",
-                        Toast.LENGTH_LONG).show();
-                return true;
-            default:
-                return false;
         }
     }
 }

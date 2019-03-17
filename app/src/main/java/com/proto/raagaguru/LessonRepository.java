@@ -21,11 +21,9 @@ class LessonRepository {
         return allLessons;
     }
 
-
     void insert(Lesson lesson) {
         new insertAsyncTask(lessonDao).execute(lesson);
     }
-
     private static class insertAsyncTask extends AsyncTask<Lesson, Void, Void> {
 
         private LessonDao mAsyncTaskDao;
@@ -37,6 +35,41 @@ class LessonRepository {
         @Override
         protected Void doInBackground(final Lesson... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    void delete(Lesson lesson) {
+        new deleteAsyncTask(lessonDao).execute(lesson);
+    }
+    private static class deleteAsyncTask extends AsyncTask<Lesson, Void, Void> {
+
+        private LessonDao mAsyncTaskDao;
+
+        deleteAsyncTask(LessonDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Lesson... params) {
+            mAsyncTaskDao.delete(params[0]);
+            return null;
+        }
+    }
+    void update(Lesson lesson) {
+        new updateAsyncTask(lessonDao).execute(lesson);
+    }
+    private static class updateAsyncTask extends AsyncTask<Lesson, Void, Void> {
+
+        private LessonDao mAsyncTaskDao;
+
+        updateAsyncTask(LessonDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Lesson... params) {
+            mAsyncTaskDao.update(params[0]);
             return null;
         }
     }
