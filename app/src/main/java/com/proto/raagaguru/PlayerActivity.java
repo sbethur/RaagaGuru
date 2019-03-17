@@ -46,7 +46,7 @@ public class PlayerActivity extends AppCompatActivity {
         controlView.setPlayer(player);
 
         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(
-                this, Util.getUserAgent(this, "ExoPlayer"));
+    this, Util.getUserAgent(this, "ExoPlayer"));
 
         Uri currentTrack = Uri.parse(audioFile);
         ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
@@ -76,9 +76,9 @@ public class PlayerActivity extends AppCompatActivity {
 
     public void saveLessonClick(View view) {
         Toast.makeText(
-                getApplicationContext(),
-                getString(R.string.lessonSaved),
-                Toast.LENGTH_LONG).show();
+            getApplicationContext(),
+            getString(R.string.lessonSaved),
+            Toast.LENGTH_LONG).show();
 
         Intent replyIntent = new Intent();
         replyIntent.putExtra(Constants.AUDIO_FILE, audioFile);

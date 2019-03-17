@@ -6,6 +6,12 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+enum DbOperation {
+    INSERT,
+    DELETE,
+    UPDATE
+}
+
 class LessonRepository {
 
     private LessonDao lessonDao;
@@ -21,55 +27,35 @@ class LessonRepository {
         return allLessons;
     }
 
-    void insert(Lesson lesson) {
-        new insertAsyncTask(lessonDao).execute(lesson);
+    void modify(Lesson lesson, DbOperation operation) {
+        new modifyAsyncTask(lessonDao, operation).execute(lesson);
     }
-    private static class insertAsyncTask extends AsyncTask<Lesson, Void, Void> {
+    private static class modifyAsyncTask extends AsyncTask<Lesson, Void, Void> {
 
-        private LessonDao mAsyncTaskDao;
+        private LessonDao asyncTaskDao;
+        private DbOperation operation;
 
-        insertAsyncTask(LessonDao dao) {
-            mAsyncTaskDao = dao;
+        modifyAsyncTask(LessonDao dao, DbOperation operation) {
+            asyncTaskDao = dao;
+            this.operation = operation;
+
         }
 
         @Override
         protected Void doInBackground(final Lesson... params) {
-            mAsyncTaskDao.insert(params[0]);
-            return null;
-        }
-    }
-
-    void delete(Lesson lesson) {
-        new deleteAsyncTask(lessonDao).execute(lesson);
-    }
-    private static class deleteAsyncTask extends AsyncTask<Lesson, Void, Void> {
-
-        private LessonDao mAsyncTaskDao;
-
-        deleteAsyncTask(LessonDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final Lesson... params) {
-            mAsyncTaskDao.delete(params[0]);
-            return null;
-        }
-    }
-    void update(Lesson lesson) {
-        new updateAsyncTask(lessonDao).execute(lesson);
-    }
-    private static class updateAsyncTask extends AsyncTask<Lesson, Void, Void> {
-
-        private LessonDao mAsyncTaskDao;
-
-        updateAsyncTask(LessonDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final Lesson... params) {
-            mAsyncTaskDao.update(params[0]);
+            switch (operation) {
+                case INSERT:
+                    asyncTaskDao.insert(params[0]);
+                    break;
+                case DELETE:
+                    asyncTaskDao.delete(params[0]);
+                    break;
+                case UPDATE:
+                    asyncTaskDao.update(params[0]);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
             return null;
         }
     }

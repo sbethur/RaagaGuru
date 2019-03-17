@@ -46,10 +46,15 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Le
                         case R.id.menu_edit:
                             Toast.makeText(
                                 context,
-                                "Updated " + lessons.get(position).getAudioFileName(),
+                            "Updated " + lessons.get(position).getAudioFileName(),
                                 Toast.LENGTH_LONG).show();
+
+                            int newTagData = lessons.get(position).getTagData() + 1;
+                            lessons.get(position).setTagData(newTagData);
                             lessonViewModel.update(lessons.get(position));
+
                             return true;
+
                         case R.id.menu_delete:
                             lessonViewModel.delete(lessons.get(position));
                             return true;
@@ -66,10 +71,13 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Le
         }
 
         lessonItemViewHolder.parentLayout.setOnClickListener(
-            view -> Toast.makeText(
-                context,
-                "TODO: StudentView (i.e. play lesson)",
-                Toast.LENGTH_SHORT).show());
+            view -> {
+                int tagData = lessons.get(position).getTagData();
+                Toast.makeText(
+                    context,
+                    "TODO: StudentView (i.e. play lesson) " + tagData,
+                    Toast.LENGTH_SHORT).show();
+            });
     }
 
     void setLessons(ArrayList<Lesson> lessons){

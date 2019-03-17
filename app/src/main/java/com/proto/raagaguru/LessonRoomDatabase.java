@@ -20,9 +20,9 @@ public abstract class LessonRoomDatabase extends RoomDatabase {
             synchronized (LessonRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            LessonRoomDatabase.class, "lesson_database")
-                            .addCallback(sRoomDatabaseCallback)
-                            .build();
+                        LessonRoomDatabase.class, "lesson_database")
+                        .addCallback(sRoomDatabaseCallback)
+                        .build();
                 }
             }
         }

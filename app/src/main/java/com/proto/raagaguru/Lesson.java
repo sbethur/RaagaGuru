@@ -13,10 +13,16 @@ public class Lesson {
     @NonNull
     private String audioFileName;
 
+    private int tagData;
 
-    public Lesson(@NonNull String audioFilePath, @NonNull String audioFileName) {
+
+    public Lesson(
+            @NonNull String audioFilePath,
+            @NonNull String audioFileName,
+            int tagData) {
         this.audioFilePath = audioFilePath;
         this.audioFileName = audioFileName;
+        this.tagData = tagData;
     }
 
     @NonNull
@@ -27,5 +33,13 @@ public class Lesson {
     @NonNull
     String getAudioFileName() {
         return audioFileName;
+    }
+
+    int getTagData() {
+        return tagData;
+    }
+
+    void setTagData(int tagData) {
+        this.tagData = tagData;
     }
 }

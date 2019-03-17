@@ -19,7 +19,7 @@ public class LessonViewModel extends AndroidViewModel {
     }
 
     LiveData<List<Lesson>> getAllLessons() { return allLessons; }
-    void insert(Lesson lesson) { repository.insert(lesson); }
-    void delete(Lesson lesson) { repository.delete(lesson); }
-    void update(Lesson lesson) { repository.update(lesson); }
+    void insert(Lesson lesson) { repository.modify(lesson, DbOperation.INSERT); }
+    void delete(Lesson lesson) { repository.modify(lesson, DbOperation.DELETE); }
+    void update(Lesson lesson) { repository.modify(lesson, DbOperation.UPDATE); }
 }
