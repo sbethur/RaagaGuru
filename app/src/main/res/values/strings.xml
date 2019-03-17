@@ -8,5 +8,7 @@
     <string name="lessonSaved">Lesson Saved</string>
     <string name="placeholder">No Lessons Added</string>
     <string name="lessonMenuDescription">Lesson Menu</string>
-    <string name="deleteLesson">Delete</string>
+    <string name="editLesson">Edit Lesson</string>
+    <string name="deleteLesson">Delete Lesson</string>
+    <string name="noLessons">No Lessons</string>
 </resources>

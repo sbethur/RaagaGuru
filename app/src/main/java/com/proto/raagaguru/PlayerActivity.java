@@ -34,8 +34,6 @@ import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
 public class PlayerActivity extends AppCompatActivity {
 
-    public static final String LESSON_NAME = PACKAGE_NAME + ".LESSSON_NAME";
-
     private PlayerView playerView;
     private PlayerControlView controlView;
     private SimpleExoPlayer player;
@@ -51,7 +49,7 @@ public class PlayerActivity extends AppCompatActivity {
         controlView = findViewById(R.id.control_view);
 
         Intent intent = getIntent();
-        audioFile = intent.getStringExtra(MainActivity.AUDIO_FILE);
+        audioFile = intent.getStringExtra(Constants.AUDIO_FILE);
     }
 
     @Override
@@ -98,7 +96,8 @@ public class PlayerActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
 
         Intent replyIntent = new Intent();
-        replyIntent.putExtra(LESSON_NAME, lessonName);
+        replyIntent.putExtra(Constants.AUDIO_FILE, audioFile);
+        replyIntent.putExtra(Constants.LESSON_NAME, lessonName);
         setResult(RESULT_OK, replyIntent);
         finish();
     }

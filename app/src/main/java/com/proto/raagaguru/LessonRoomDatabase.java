@@ -48,6 +48,7 @@ public abstract class LessonRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
+            // Use to clear db
             //dao.deleteAll();
             return null;
         }

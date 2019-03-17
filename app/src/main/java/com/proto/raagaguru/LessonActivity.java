@@ -1,23 +1,20 @@
 package com.proto.raagaguru;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-public class LessonActivity extends AppCompatActivity {
+public class LessonActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     private static final int FILE_METADATA_CODE = 43;
     private LessonViewModel lessonViewModel;
@@ -38,14 +35,13 @@ public class LessonActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent receivedIntent = getIntent();
-        if (receivedIntent.hasExtra(MainActivity.AUDIO_FILE)) {
-            String audioFile = receivedIntent.getStringExtra(MainActivity.AUDIO_FILE);
+        if (receivedIntent.hasExtra(Constants.AUDIO_FILE)) {
+            String audioFile = receivedIntent.getStringExtra(Constants.AUDIO_FILE);
             Intent intent = new Intent(this, PlayerActivity.class);
-            intent.putExtra(MainActivity.AUDIO_FILE, audioFile);
+            intent.putExtra(Constants.AUDIO_FILE, audioFile);
             startActivityForResult(intent, FILE_METADATA_CODE);
         }
     }
-
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -58,7 +54,9 @@ public class LessonActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == FILE_METADATA_CODE && resultCode == RESULT_OK) {
-            Lesson lesson = new Lesson(data.getStringExtra(PlayerActivity.LESSON_NAME));
+            Lesson lesson = new Lesson(
+                data.getStringExtra(Constants.AUDIO_FILE),
+                data.getStringExtra(Constants.LESSON_NAME));
             lessonViewModel.insert(lesson);
         } else {
             Toast.makeText(
@@ -70,8 +68,30 @@ public class LessonActivity extends AppCompatActivity {
 
     public void showLessonMenu(View view) {
         PopupMenu popup = new PopupMenu(this, view);
+        popup.setOnMenuItemClickListener(this);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.actions, popup.getMenu());
         popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.menu_edit:
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Implement edit",
+                        Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_delete:
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Implement delete",
+                        Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return false;
+        }
     }
 }

@@ -21,6 +21,4 @@ public class LessonViewModel extends AndroidViewModel {
     LiveData<List<Lesson>> getAllLessons() { return allLessons; }
 
     public void insert(Lesson lesson) { repository.insert(lesson); }
-
-
 }

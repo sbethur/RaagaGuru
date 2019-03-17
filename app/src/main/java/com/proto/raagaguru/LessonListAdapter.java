@@ -32,14 +32,17 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         if (lessons != null) {
             Lesson current = lessons.get(position);
-            viewHolder.lessonNameView.setText(current.getAudioFilePath());
+            viewHolder.lessonNameView.setText(current.getAudioFileName());
         } else {
             // Covers the case of data not being ready yet.
-            viewHolder.lessonNameView.setText("No Lessons");
+            viewHolder.lessonNameView.setText(context.getString(R.string.noLessons));
         }
 
         viewHolder.parentLayout.setOnClickListener(
-            view -> Toast.makeText(context, "TODO", Toast.LENGTH_SHORT).show());
+            view -> Toast.makeText(
+                context,
+                "TODO: StudentView (i.e. play lesson)",
+                Toast.LENGTH_SHORT).show());
     }
 
     void setLessons(ArrayList<Lesson> lessons){

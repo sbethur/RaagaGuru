@@ -9,23 +9,23 @@ public class Lesson {
     @PrimaryKey
     @NonNull
     private String audioFilePath;
-    //private List<Integer> tags;
 
-    public Lesson(@NonNull String audioFilePath) {
+    @NonNull
+    private String audioFileName;
+
+
+    public Lesson(@NonNull String audioFilePath, @NonNull String audioFileName) {
         this.audioFilePath = audioFilePath;
+        this.audioFileName = audioFileName;
     }
 
+    @NonNull
     public String getAudioFilePath() {
         return audioFilePath;
     }
 
-    /*
-    void addTag (Integer newTag) {
-        tags.add(newTag);
+    @NonNull
+    public String getAudioFileName() {
+        return audioFileName;
     }
-
-    List<Integer> getTags() {
-        return tags;
-    }
-    */
 }

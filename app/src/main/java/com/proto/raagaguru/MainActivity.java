@@ -15,7 +15,6 @@ import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 public class MainActivity extends AppCompatActivity {
 
     private static final int READ_REQUEST_CODE = 42;
-    public static final String AUDIO_FILE = PACKAGE_NAME + ".AUDIO_FILE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 uri = resultData.getData();
                 assert uri != null;
                 Intent intent = new Intent(this, LessonActivity.class);
-                intent.putExtra(AUDIO_FILE, uri.toString());
+                intent.putExtra(Constants.AUDIO_FILE, uri.toString());
                 startActivity(intent);
             }
         }
